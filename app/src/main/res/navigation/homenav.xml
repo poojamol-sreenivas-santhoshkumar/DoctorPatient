@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/homenav"
+    app:startDestination="@id/dashboardFragment">
+
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="uk.ac.tees.W9581934.Patient.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+    <fragment
+        android:id="@+id/userBookingFragment"
+        android:name="uk.ac.tees.W9581934.Patient.UserBookingFragment"
+        android:label="fragment_user_booking"
+        tools:layout="@layout/fragment_user_booking" />
+    <fragment
+        android:id="@+id/myBookingsFragment"
+        android:name="uk.ac.tees.W9581934.Patient.MyBookingsFragment"
+        android:label="fragment_my_bookings"
+        tools:layout="@layout/fragment_my_bookings" />
+    <fragment
+        android:id="@+id/userFeedbackFragment"
+        android:name="uk.ac.tees.W9581934.Patient.UserFeedbackFragment"
+        android:label="fragment_user_feedback"
+        tools:layout="@layout/fragment_user_feedback" />
+    <fragment
+        android:id="@+id/chatWithdoctor"
+        android:name="uk.ac.tees.W9581934.Patient.ChatWithdoctor"
+        android:label="fragment_chat_withdoctor"
+        tools:layout="@layout/fragment_chat_withdoctor" />
+</navigation>
