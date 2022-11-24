@@ -1,9 +1,9 @@
 package uk.ac.tees.W9581934.Models;
 
 public class BookingModel {
-    String doc_name,patient_name,tokenNo,patient_phone,bookingDate,bookingType,dept_name,doc_image,bookingTime;
+    String doc_name,patient_name,tokenNo,patient_phone,bookingDate,bookingType,dept_name;
 
-    public BookingModel(String doc_name, String patient_name, String tokenNo, String patient_phone, String bookingDate, String bookingType, String dept_name, String doc_image, String bookingTime) {
+    public BookingModel(String doc_name, String patient_name, String tokenNo, String patient_phone, String bookingDate, String bookingType, String dept_name) {
         this.doc_name = doc_name;
         this.patient_name = patient_name;
         this.tokenNo = tokenNo;
@@ -11,24 +11,7 @@ public class BookingModel {
         this.bookingDate = bookingDate;
         this.bookingType = bookingType;
         this.dept_name = dept_name;
-        this.doc_image = doc_image;
-        this.bookingTime = bookingTime;
-    }
 
-    public String getBookingTime() {
-        return bookingTime;
-    }
-
-    public void setBookingTime(String bookingTime) {
-        this.bookingTime = bookingTime;
-    }
-
-    public String getDoc_image() {
-        return doc_image;
-    }
-
-    public void setDoc_image(String doc_image) {
-        this.doc_image = doc_image;
     }
 
     public String getDoc_name() {

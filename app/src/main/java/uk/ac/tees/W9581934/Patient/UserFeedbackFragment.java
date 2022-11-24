@@ -1,5 +1,9 @@
 package uk.ac.tees.W9581934.Patient;
 
+
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -11,7 +15,18 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import uk.ac.tees.W9581934.Models.DeptModel;
+import uk.ac.tees.W9581934.Models.FeedbackModel;
 import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.FragmentUserBookingBinding;
 import uk.ac.tees.W9581934.databinding.FragmentUserFeedbackBinding;
@@ -19,6 +34,12 @@ import uk.ac.tees.W9581934.databinding.FragmentUserFeedbackBinding;
 
 public class UserFeedbackFragment extends Fragment {
     FragmentUserFeedbackBinding binding;
+  //  FirebaseStorage firebaseStorage;
+   // StorageReference storageReference;
+    FirebaseFirestore db;
+    ProgressDialog progressDoalog;
+    private ProgressBar progressbar;
+   // private FirebaseAuth mAuth;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +68,45 @@ public class UserFeedbackFragment extends Fragment {
                 if(binding.etFeedback.getText().toString().isEmpty())
                     binding.etFeedback.setError("Enter your complaints/feedbacks");
                 else{
-
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                     sendfeedback();
+                    binding.etFeedback.setText("");
                 }
             }
         });
     }
+    private void sendfeedback() {
+        progressDoalog = new ProgressDialog(requireContext());
+        progressDoalog.setMessage("Submitting....");
+        progressDoalog.setTitle("Please wait");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
+        String feedback;
+        SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
+
+        feedback = binding.etFeedback.getText().toString();
+        fireStoreDatabase:
+        FirebaseFirestore.getInstance();
+        FeedbackModel obj = new FeedbackModel(sp.getString("name",""), feedback);
+        db = FirebaseFirestore.getInstance();
+        db.collection("Feedback").add(obj).
+                addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                    @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        progressDoalog.dismiss();
+                        binding.etFeedback.setText("");
+                        Snackbar.make(requireView(), "Feedback send Successfully", Snackbar.LENGTH_LONG).show();
+                    }
+                }).
+                addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(requireContext(), "Creation failed", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+    }
+
 }

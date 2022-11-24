@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "103530413739",
+    "project_id": "doctorq-88a3c",
+    "storage_bucket": "doctorq-88a3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:103530413739:android:8107d2b02f0e79b41901ee",
+        "android_client_info": {
+          "package_name": "uk.ac.tees.W9581934"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "103530413739-7mtd3rqqg9j14g03317jlcjufphijpav.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAryWGQ_gXYc8DuODv--5PCgPHuD87wvCU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "103530413739-7mtd3rqqg9j14g03317jlcjufphijpav.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

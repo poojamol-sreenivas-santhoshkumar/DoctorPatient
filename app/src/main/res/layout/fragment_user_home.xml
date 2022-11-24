@@ -31,15 +31,15 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/bottomSheet"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         android:background="@color/peak"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconDr"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/doctor"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iconChat"
             app:layout_constraintHorizontal_bias="0.5"
@@ -48,9 +48,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconChat"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/doctor"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iconHome"
             app:layout_constraintHorizontal_bias="0.5"
@@ -59,9 +59,9 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconHome"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/doctor"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/iconBookings"
             app:layout_constraintHorizontal_bias="0.5"
@@ -70,10 +70,11 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconBookings"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/clipboard"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="visible"
             app:layout_constraintEnd_toStartOf="@+id/iconFeedback"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/iconHome"
@@ -81,9 +82,10 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/iconFeedback"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/feedback"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="8dp"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"

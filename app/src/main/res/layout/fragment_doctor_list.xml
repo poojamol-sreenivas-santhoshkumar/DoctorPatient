@@ -23,10 +23,12 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvDoctors"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvHeading"
+        app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/doctor_card"
         />
 

@@ -1,5 +1,6 @@
 package uk.ac.tees.W9581934.Admin;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.activity.OnBackPressedCallback;
@@ -8,20 +9,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import android.widget.Toast;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
-
 import uk.ac.tees.W9581934.Adapters.FeedbackAdapter;
-import uk.ac.tees.W9581934.Adapters.PatientAdapter;
 import uk.ac.tees.W9581934.Models.FeedbackModel;
-import uk.ac.tees.W9581934.Models.PatientModel;
-import uk.ac.tees.W9581934.R;
-import uk.ac.tees.W9581934.databinding.FragmentBookingListBinding;
 import uk.ac.tees.W9581934.databinding.FragmentFeedbackBinding;
 
 public class FeedbackFragment extends Fragment {
@@ -50,12 +50,50 @@ public class FeedbackFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        for(int i=0;i<10;i++) {
-            feedbackList.add(new FeedbackModel("manu","Good Service"));
-        }
+//        for(int i=0;i<10;i++) {
+//            feedbackList.add(new FeedbackModel("manu","Good Service"));
+//        }
         binding.rvFeedbacks.setLayoutManager(new LinearLayoutManager(requireContext()));
-        adapter.feedList=feedbackList;
-        binding.rvFeedbacks.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
+       showData();
     }
+    private void showData() {
+        final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
+        progressDoalog.setMessage("Loading....");
+        progressDoalog.setTitle("Please wait");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
+        //Log.d("@", "showData: Called")
+        feedbackList.clear();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("Feedback")
+                .get()
+                .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                    @Override
+                    public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                        Log.d("@", queryDocumentSnapshots + "");
+                        int i;
+                        for (i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++) {
+                            /*Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getId());
+                            Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodName"));
+                            Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodPrice"));*/
+                            feedbackList.add(new FeedbackModel(
+                                    queryDocumentSnapshots.getDocuments().get(i).getString("pname"),
+                                    queryDocumentSnapshots.getDocuments().get(i).getString("feedback")
+                            ));
+                        }
+                        progressDoalog.dismiss();
+                        adapter.feedList=feedbackList;
+                        binding.rvFeedbacks.setAdapter(adapter);
+                        adapter.notifyDataSetChanged();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+    }
+
 }

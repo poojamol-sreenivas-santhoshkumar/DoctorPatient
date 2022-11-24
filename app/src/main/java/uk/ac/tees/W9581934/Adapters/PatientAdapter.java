@@ -7,6 +7,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -19,6 +20,7 @@ import uk.ac.tees.W9581934.databinding.PatientCardBinding;
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyviewHolder> {
     public List<PatientModel> patientList;
     PatientCardBinding binding;
+    private AdapterCallback mAdapterCallback;
 
     @NonNull
     @Override
@@ -40,7 +42,13 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyviewHo
         holder.age.setText(dm.getAge());
         holder.phone.setText(dm.getPhone());
         holder.address.setText(dm.getAddress());
+        holder.root.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                //mAdapterCallback.onMethodCallback();
+            }
+        });
 
     }
 
@@ -51,10 +59,11 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.MyviewHo
 
     public class MyviewHolder extends RecyclerView.ViewHolder {
         TextView name, age, phone, address;
-
+        ConstraintLayout root;
 
         public MyviewHolder(@NonNull PatientCardBinding binding) {
             super(binding.getRoot());
+            root = binding.root;
             name = binding.tvPatientName;
             address = binding.tvPatientAddress;
             age = binding.tvPatientAge;

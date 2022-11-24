@@ -31,6 +31,18 @@
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="@+id/image" />
     <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvDptName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/cairo_regular"
+        android:text="xxxxxxxxxxx"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toEndOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@+id/tvDr" />
+    <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvPatientHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,7 +53,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/image"
-        app:layout_constraintTop_toBottomOf="@+id/tvDr" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDptName" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvLine"
@@ -51,9 +63,9 @@
         android:text="-------------"
         android:textColor="@color/black"
         android:textSize="16sp"
-        android:layout_marginBottom="-10dp"
+        android:layout_marginTop="-10dp"
         app:layout_constraintEnd_toEndOf="@id/tvPatientHead"
-        app:layout_constraintBottom_toBottomOf="@id/image"
+        app:layout_constraintTop_toBottomOf="@+id/tvPatientHead"
         app:layout_constraintStart_toStartOf="@id/tvPatientHead" />
 
     <androidx.appcompat.widget.AppCompatTextView
@@ -144,6 +156,7 @@
         android:layout_marginTop="4dp"
         android:fontFamily="@font/cairo_regular"
         android:text="Time 10:00 am"
+        android:visibility="gone"
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toEndOf="@id/image"
@@ -158,6 +171,8 @@
         android:text="Online"
         android:textColor="@color/black"
         android:textSize="16sp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@+id/tvBookingTime" />
 </androidx.constraintlayout.widget.ConstraintLayout>

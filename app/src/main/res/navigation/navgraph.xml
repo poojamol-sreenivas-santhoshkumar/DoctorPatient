@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_loginFragment_to_doctorHomeFragment"
             app:destination="@id/doctorHomeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_doctorDashboard"
+            app:destination="@id/doctorDashboard" />
+        <action
+            android:id="@+id/action_loginFragment_to_patientHome"
+            app:destination="@id/patientHome" />
     </fragment>
     <fragment
         android:id="@+id/registerFragment"
@@ -108,5 +114,29 @@
         android:name="uk.ac.tees.W9581934.Admin.Add_ViewDepartments"
         android:label="fragment_add__view_departments"
         tools:layout="@layout/fragment_add__view_departments" />
+    <fragment
+        android:id="@+id/patientHome"
+        android:name="uk.ac.tees.W9581934.Patient.PatientHome"
+        android:label="fragment_patient_home"
+        tools:layout="@layout/fragment_patient_home" />
+    <fragment
+        android:id="@+id/doctorDashboard"
+        android:name="uk.ac.tees.W9581934.Doctor.DoctorDashboard"
+        android:label="fragment_doctor_dashboard"
+        tools:layout="@layout/fragment_doctor_dashboard" />
+    <fragment
+        android:id="@+id/bookingPageFragment"
+        android:name="uk.ac.tees.W9581934.Patient.BookingPageFragment"
+        android:label="fragment_booking_page"
+        tools:layout="@layout/fragment_booking_page" />
+    <fragment
+        android:id="@+id/bookDoctor2"
+        android:name="uk.ac.tees.W9581934.Patient.BookDoctor"
+        android:label="fragment_book_doctor"
+        tools:layout="@layout/fragment_book_doctor" >
+        <action
+            android:id="@+id/action_bookDoctor2_to_bookingPageFragment"
+            app:destination="@id/bookingPageFragment" />
+    </fragment>
 
 </navigation>

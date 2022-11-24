@@ -2,9 +2,9 @@ package uk.ac.tees.W9581934.Models;
 
 public class DeptModel {
     String dname;
-    int dept_id;
+    String dept_id;
 
-    public DeptModel(String dname, int dept_id) {
+    public DeptModel(String dname, String dept_id) {
         this.dname = dname;
         this.dept_id = dept_id;
     }
@@ -17,11 +17,11 @@ public class DeptModel {
         this.dname = dname;
     }
 
-    public int getDept_id() {
+    public String getDept_id() {
         return dept_id;
     }
 
-    public void setDept_id(int dept_id) {
+    public void setDept_id(String dept_id) {
         this.dept_id = dept_id;
     }
 }

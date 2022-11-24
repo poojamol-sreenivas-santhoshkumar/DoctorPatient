@@ -12,11 +12,6 @@
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard" />
     <fragment
-        android:id="@+id/userBookingFragment"
-        android:name="uk.ac.tees.W9581934.Patient.UserBookingFragment"
-        android:label="fragment_user_booking"
-        tools:layout="@layout/fragment_user_booking" />
-    <fragment
         android:id="@+id/myBookingsFragment"
         android:name="uk.ac.tees.W9581934.Patient.MyBookingsFragment"
         android:label="fragment_my_bookings"
@@ -31,4 +26,22 @@
         android:name="uk.ac.tees.W9581934.Patient.ChatWithdoctor"
         android:label="fragment_chat_withdoctor"
         tools:layout="@layout/fragment_chat_withdoctor" />
+    <fragment
+        android:id="@+id/bookDoctor"
+        android:name="uk.ac.tees.W9581934.Patient.BookDoctor"
+        android:label="fragment_book_doctor"
+        tools:layout="@layout/fragment_book_doctor" >
+        <action
+            android:id="@+id/action_bookDoctor_to_bookingPageFragment2"
+            app:destination="@id/bookingPageFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/bookingPageFragment2"
+        android:name="uk.ac.tees.W9581934.Patient.BookingPageFragment"
+        android:label="fragment_booking_page"
+        tools:layout="@layout/fragment_booking_page" >
+        <action
+            android:id="@+id/action_bookingPageFragment2_to_myBookingsFragment"
+            app:destination="@id/myBookingsFragment" />
+    </fragment>
 </navigation>

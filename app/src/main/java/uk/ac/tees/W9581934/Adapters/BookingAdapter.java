@@ -38,9 +38,9 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
         holder.tvrname.setText(dm.getDoc_name());
         holder.tvPatientName.setText(dm.getPatient_name());
         holder.tvPatientPhone.setText(dm.getPatient_phone());
-        holder.tvbookingDate.setText(dm.getBookingDate());
-        holder.tvbookingTime.setText(dm.getBookingTime());
+        holder.tvbookingDate.setText("Booking To "+dm.getBookingDate());
         holder.tvbookingType.setText(dm.getBookingType());
+        holder.tvbookingDpt.setText("["+dm.getDept_name()+"]");
         holder.token.setText(dm.getTokenNo());
 
 
@@ -52,7 +52,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
     }
 
     public class MyviewHolder extends RecyclerView.ViewHolder {
-        TextView tvrname, tvPatientPhone, tvPatientName, tvbookingDate, tvbookingTime, tvbookingType,token;
+        TextView tvrname, tvPatientPhone, tvPatientName, tvbookingDate, tvbookingDpt, tvbookingType,token;
         ImageView docImageView;
 
         public MyviewHolder(@NonNull BookingCardBinding binding) {
@@ -61,7 +61,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
             tvPatientPhone = binding.tvPatientPhone;
             tvPatientName = binding.tvPatientName;
             tvbookingDate = binding.tvBookingDate;
-            tvbookingTime = binding.tvBookingTime;
+            tvbookingDpt = binding.tvDptName;
             tvbookingType = binding.tvBookingType;
             docImageView=binding.image;
             token=binding.tvToken;

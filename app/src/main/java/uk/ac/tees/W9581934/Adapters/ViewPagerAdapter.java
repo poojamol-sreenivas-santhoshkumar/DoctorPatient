@@ -3,18 +3,11 @@ package uk.ac.tees.W9581934.Adapters;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
-
 import java.util.List;
-
-import uk.ac.tees.W9581934.Models.FeedbackModel;
 import uk.ac.tees.W9581934.Models.ViewPagerModel;
-import uk.ac.tees.W9581934.databinding.FeedbackTileBinding;
 import uk.ac.tees.W9581934.databinding.SpotsBinding;
 
 public class ViewPagerAdapter extends RecyclerView.Adapter<ViewPagerAdapter.MyviewHolder> {

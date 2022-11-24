@@ -1,9 +1,11 @@
 package uk.ac.tees.W9581934.Models;
 
 public class DoctorListModel {
-    String doctorName,departmentName,specializedStream,dob,age,consultingTime,availabilityDays,userName,mobileNumber;
-int doctorImage;
-    public DoctorListModel(String doctorName, String departmentName, String specializedStream, String dob, String age, String consultingTime, String availabilityDays, String userName, String mobileNumber, int doctorImage) {
+    String doc_id,doctorName,departmentName,specializedStream,dob,age,consultingTime,availabilityDays,
+            userName,mobileNumber,type,doctorImage,password,experience,endtime;
+
+    public DoctorListModel(String doc_id, String doctorName, String departmentName, String specializedStream, String dob, String age, String consultingTime, String availabilityDays, String userName, String mobileNumber, String type, String doctorImage, String password, String experience, String endtime) {
+        this.doc_id = doc_id;
         this.doctorName = doctorName;
         this.departmentName = departmentName;
         this.specializedStream = specializedStream;
@@ -13,7 +15,19 @@ int doctorImage;
         this.availabilityDays = availabilityDays;
         this.userName = userName;
         this.mobileNumber = mobileNumber;
+        this.type = type;
         this.doctorImage = doctorImage;
+        this.password = password;
+        this.experience = experience;
+        this.endtime = endtime;
+    }
+
+    public String getDoc_id() {
+        return doc_id;
+    }
+
+    public void setDoc_id(String doc_id) {
+        this.doc_id = doc_id;
     }
 
     public String getDoctorName() {
@@ -88,11 +102,43 @@ int doctorImage;
         this.mobileNumber = mobileNumber;
     }
 
-    public int getDoctorImage() {
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getDoctorImage() {
         return doctorImage;
     }
 
-    public void setDoctorImage(int doctorImage) {
+    public void setDoctorImage(String doctorImage) {
         this.doctorImage = doctorImage;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getExperience() {
+        return experience;
+    }
+
+    public void setExperience(String experience) {
+        this.experience = experience;
+    }
+
+    public String getEndtime() {
+        return endtime;
+    }
+
+    public void setEndtime(String endtime) {
+        this.endtime = endtime;
     }
 }
