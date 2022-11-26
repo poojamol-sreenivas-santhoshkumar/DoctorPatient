@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import uk.ac.tees.W9581934.Adapters.FeedbackAdapter;
 import uk.ac.tees.W9581934.Models.FeedbackModel;
+import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.FragmentFeedbackBinding;
 
 public class FeedbackFragment extends Fragment {
@@ -34,7 +35,7 @@ public class FeedbackFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback( this,new OnBackPressedCallback(true){
             @Override
             public void handleOnBackPressed() {
-                Navigation.findNavController(getView()).navigateUp();
+                Navigation.findNavController(getView()).navigate(R.id.action_feedbackFragment_to_adminHomeFragment);
             }
         });
     }

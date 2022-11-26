@@ -29,6 +29,7 @@ import java.util.List;
 import uk.ac.tees.W9581934.Adapters.AdapterCallback;
 import uk.ac.tees.W9581934.Adapters.DoctorListAdapter;
 import uk.ac.tees.W9581934.Models.DoctorListModel;
+import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.FragmentDoctorListBinding;
 
 
@@ -43,7 +44,7 @@ public class DoctorListFragment extends Fragment implements AdapterCallback {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Navigation.findNavController(getView()).navigateUp();
+                Navigation.findNavController(getView()).navigate(R.id.action_doctorListFragment_to_adminHomeFragment);
             }
         });
     }
@@ -95,16 +96,16 @@ public class DoctorListFragment extends Fragment implements AdapterCallback {
                             Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodName"));
                             Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodPrice"));*/
                             DoctorList.add(new DoctorListModel(
-                                    queryDocumentSnapshots.getDocuments().get(i).getString("doc_id"),
-                                    queryDocumentSnapshots.getDocuments().get(i).getString("doctorName"),
+                                    queryDocumentSnapshots.getDocuments().get(i).getId(),
+                                    queryDocumentSnapshots.getDocuments().get(i).getString("name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("departmentName"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("specializedStream"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("dob"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("age"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("consultingTime"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("availabilityDays"),
-                                    queryDocumentSnapshots.getDocuments().get(i).getString("userName"),
-                                    queryDocumentSnapshots.getDocuments().get(i).getString("mobileNumber"),
+                                    queryDocumentSnapshots.getDocuments().get(i).getString("username"),
+                                    queryDocumentSnapshots.getDocuments().get(i).getString("phone"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("type"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("doctorImage"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("password"),

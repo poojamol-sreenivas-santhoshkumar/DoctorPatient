@@ -1,17 +1,14 @@
 package uk.ac.tees.W9581934.Models;
 
 public class PatientModel {
-        String id,type,name,age,address,phone,username,password;
+        String userId,type,name,age,address,phone,username,password;
 
-        public PatientModel(String id, String type,String name, String age, String address, String phone, String username, String password) {
-                this.id = id;
-                this.type = type;
-                this.name = name;
-                this.age = age;
-                this.address = address;
-                this.phone = phone;
-                this.username = username;
-                this.password = password;
+        public String getUserId() {
+                return userId;
+        }
+
+        public void setUserId(String userId) {
+                this.userId = userId;
         }
 
         public String getType() {
@@ -20,14 +17,6 @@ public class PatientModel {
 
         public void setType(String type) {
                 this.type = type;
-        }
-
-        public String getId() {
-                return id;
-        }
-
-        public void setId(String id) {
-                this.id = id;
         }
 
         public String getName() {
@@ -75,6 +64,17 @@ public class PatientModel {
         }
 
         public void setPassword(String password) {
+                this.password = password;
+        }
+
+        public PatientModel(String userId, String type, String name, String age, String address, String phone, String username, String password) {
+                this.userId = userId;
+                this.type = type;
+                this.name = name;
+                this.age = age;
+                this.address = address;
+                this.phone = phone;
+                this.username = username;
                 this.password = password;
         }
 }

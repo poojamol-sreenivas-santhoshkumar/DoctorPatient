@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -36,13 +37,18 @@ public class BookingPageFragment extends Fragment {
     private int mYear, mMonth, mDay, mHour, mMinute;
     String loc;
     DatePickerDialog datePickerDialog;
-    String selectedVal, date, drname, drdpt, name, mobile;
+    String selectedVal, userId, drname, drdpt, name, mobile, docId;
 
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Navigation.findNavController(getView()).navigateUp();
+            }
+        });
     }
 
     @Override
@@ -59,9 +65,9 @@ public class BookingPageFragment extends Fragment {
         SharedPreferences doctor = getContext().getSharedPreferences("dr", Context.MODE_PRIVATE);
         drname = doctor.getString("drname", "error");
         drdpt = doctor.getString("drdpt", "error");
+        docId = doctor.getString("docid", "error");
         binding.etDate.setOnClickListener(new View.OnClickListener() {
             @Override
-
             public void onClick(View v) {
                 datePicker();
             }
@@ -72,20 +78,21 @@ public class BookingPageFragment extends Fragment {
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
         name = sp.getString("name", "error");
         mobile = sp.getString("mobile", "error");
-
+        userId = sp.getString("userId", "");
+        Log.d("##", userId);
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (binding.radioOnline.isChecked()) {
                     selectedVal = binding.radioOnline.getText().toString();
-                }
-                else if (binding.radioOffline.isChecked()) {
+                } else if (binding.radioOffline.isChecked()) {
                     selectedVal = binding.radioOffline.getText().toString();
                 }
-                if (binding.etDate.getText().toString().equals("")){
-                    Toast.makeText(requireContext(),"Select date & type",Toast.LENGTH_LONG).show();
-                }
-                else {
+                if (binding.etDate.getText().toString().equals("")) {
+                    Toast.makeText(requireContext(), "Select date & type", Toast.LENGTH_LONG).show();
+                } else if (selectedVal.isEmpty()) {
+                    Toast.makeText(requireContext(), "Select Mode of appointment", Toast.LENGTH_LONG).show();
+                } else {
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     db.collection("Bookings").whereEqualTo("doc_name", drname)
                             .whereEqualTo("bookingDate", binding.etDate.getText().toString()).get().
@@ -93,7 +100,7 @@ public class BookingPageFragment extends Fragment {
                                 @Override
                                 public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
                                     int size = queryDocumentSnapshots.getDocuments().size();
-                                    Log.d("##", size+"");
+                                    Log.d("##", size + "");
                                /* if (queryDocumentSnapshots.getDocuments().size() > 0 ) {
                                     Toast.makeText(requireContext(), "Sorry, Already booked", Toast.LENGTH_SHORT).show();
                                     //addfirstuser
@@ -101,19 +108,16 @@ public class BookingPageFragment extends Fragment {
                                 }*/
                                     if (queryDocumentSnapshots.getDocuments().size() == 10) {
                                         Toast.makeText(requireContext(), "Sorry, Booking Full", Toast.LENGTH_SHORT).show();
-                                    }
-                                    else
-                                    {
+                                    } else {
                                         db.collection("Bookings").whereEqualTo("doc_name", drname).
                                                 whereEqualTo("patient_name", name)
                                                 .whereEqualTo("bookingDate", binding.etDate.getText().toString()).get().
                                                 addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                                                     @Override
                                                     public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                                        if (queryDocumentSnapshots.getDocuments().size() >0) {
+                                                        if (queryDocumentSnapshots.getDocuments().size() > 0) {
                                                             Toast.makeText(requireContext(), "Sorry,  Already booked", Toast.LENGTH_SHORT).show();
-                                                        }
-                                                        else{
+                                                        } else {
                                                             firstBooking(size);
                                                             Log.d("call", "fn-called");
                                                         }
@@ -167,15 +171,15 @@ public class BookingPageFragment extends Fragment {
     }
 
     private void firstBooking(int size) {
-        String val=size+1+"";
-        binding.tvToken.setText("Token Number :-"+val);
+        String val = size + 1 + "";
+        binding.tvToken.setText("Token Number :-" + val);
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Checking....");
         progressDoalog.setTitle("Please wait");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         Log.d("call", "fn-inside ");
-        BookingModel obj1 = new BookingModel(drname, name, val, mobile, binding.etDate.getText().toString(), selectedVal, drdpt);
+        BookingModel obj1 = new BookingModel(docId, drname, name, val, mobile, binding.etDate.getText().toString(), selectedVal, drdpt, userId);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Bookings").add(obj1).
                 addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
@@ -197,31 +201,4 @@ public class BookingPageFragment extends Fragment {
 
     }
 
-   /* private void Booking(int token) {
-        final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
-        progressDoalog.setMessage("Checking....");
-        progressDoalog.setTitle("Please wait");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDoalog.show();
-        Log.d("call", "fn-inside ");
-        BookingModel obj1 = new BookingModel(drname, name, token+1+"", mobile, date, selectedVal, drdpt);
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        db.collection("Bookings").add(obj1).
-                addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                         @Override
-                                         public void onSuccess(DocumentReference documentReference) {
-                                             Log.d("TAG", "onSuccess: Success");
-                                             progressDoalog.dismiss();
-                                             Snackbar.make(requireView(), "Booking Successfull", Snackbar.LENGTH_LONG).show();
-                                         }
-                                     }
-                ).
-                addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d("TAG", "onbooking Try: Fail");
-                    }
-                });
-
-    }*/
 }

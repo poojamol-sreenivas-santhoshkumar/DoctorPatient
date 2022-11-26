@@ -93,7 +93,7 @@ public class RegisterDoctorFragment extends Fragment implements  CallBackTwice {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Navigation.findNavController(getView()).navigateUp();
+                Navigation.findNavController(getView()).navigate(R.id.action_registerDoctorFragment_to_adminHomeFragment);
             }
         });
     }

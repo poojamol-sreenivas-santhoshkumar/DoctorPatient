@@ -41,7 +41,7 @@ public class AdminHomeFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Navigation.findNavController(getView()).navigateUp();
+                        Navigation.findNavController(getView()).navigate(R.id.action_adminHomeFragment_to_loginFragment);
 
                     }
                 });

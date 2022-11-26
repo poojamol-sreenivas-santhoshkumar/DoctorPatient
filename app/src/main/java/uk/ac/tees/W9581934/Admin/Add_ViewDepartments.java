@@ -55,7 +55,7 @@ public class Add_ViewDepartments extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-                Navigation.findNavController(getView()).navigateUp();
+                Navigation.findNavController(getView()).navigate(R.id.action_add_ViewDepartments_to_adminHomeFragment);
             }
         });
     }

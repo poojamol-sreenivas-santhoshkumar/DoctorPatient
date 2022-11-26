@@ -15,7 +15,11 @@
         android:id="@+id/myBookingsFragment"
         android:name="uk.ac.tees.W9581934.Patient.MyBookingsFragment"
         android:label="fragment_my_bookings"
-        tools:layout="@layout/fragment_my_bookings" />
+        tools:layout="@layout/fragment_my_bookings" >
+        <action
+            android:id="@+id/action_myBookingsFragment_self"
+            app:destination="@id/myBookingsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userFeedbackFragment"
         android:name="uk.ac.tees.W9581934.Patient.UserFeedbackFragment"

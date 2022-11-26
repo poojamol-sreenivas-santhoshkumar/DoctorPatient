@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.FragmentUserHomeBinding;
@@ -38,27 +39,8 @@ public class PatientHome extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback( this,new OnBackPressedCallback(true){
             @Override
             public void handleOnBackPressed() {
-                Log.d("@@", "handleOnBackPressed: click");
-                AlertDialog.Builder alertbox=new AlertDialog.Builder(requireContext());
-                alertbox.setMessage("Do you really wants to logout from this app?");
-                alertbox.setTitle("Logout!!");
+                Toast.makeText(getContext(), "please logout to Exit",Toast.LENGTH_SHORT).show();
 
-                alertbox.setPositiveButton("Logout", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-
-                        Navigation.findNavController(getView()).navigateUp();
-
-                    }
-                });
-                alertbox.setNegativeButton("cancel", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                alertbox.show();
 
 
             }

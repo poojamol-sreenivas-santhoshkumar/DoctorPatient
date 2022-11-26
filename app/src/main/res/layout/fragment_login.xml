@@ -55,6 +55,7 @@
             android:background="@drawable/input_field"
             android:fontFamily="@font/cairo_semi_bold"
             android:hint="Password"
+            android:inputType="textPassword"
             android:paddingVertical="10dp"
             android:paddingStart="16dp"
             android:textColor="@color/black"

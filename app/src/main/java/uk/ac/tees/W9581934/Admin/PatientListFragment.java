@@ -44,7 +44,7 @@ public class PatientListFragment extends Fragment implements AdapterCallback {
         requireActivity().getOnBackPressedDispatcher().addCallback( this,new OnBackPressedCallback(true){
             @Override
             public void handleOnBackPressed() {
-                Navigation.findNavController(getView()).navigateUp();
+                Navigation.findNavController(getView()).navigate(R.id.action_patientListFragment_to_adminHomeFragment);
             }
         });
     }

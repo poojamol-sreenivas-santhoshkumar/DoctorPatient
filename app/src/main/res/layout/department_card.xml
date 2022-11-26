@@ -9,7 +9,7 @@
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tvdname"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:fontFamily="@font/cairo_bold"
@@ -19,5 +19,13 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
+<androidx.appcompat.widget.AppCompatImageView
+    android:layout_width="30dp"
+    android:layout_height="30dp"
+    android:src="@drawable/ic_delete"
+    android:id="@+id/d_delete"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    android:layout_marginEnd="20dp"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,7 +1,9 @@
 package uk.ac.tees.W9581934.Patient;
 
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -27,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.tees.W9581934.Adapters.BookingAdapter;
+import uk.ac.tees.W9581934.Adapters.DoctorListAdapter;
 import uk.ac.tees.W9581934.Models.BookingModel;
 import uk.ac.tees.W9581934.Models.DoctorListModel;
 import uk.ac.tees.W9581934.R;
@@ -36,7 +39,7 @@ import uk.ac.tees.W9581934.databinding.FragmentMyBookingsBinding;
 
 public class MyBookingsFragment extends Fragment {
     FragmentMyBookingsBinding binding;
-    BookingAdapter adapter = new BookingAdapter();
+    BookingAdapter adapter;
     List<BookingModel> bookingList = new ArrayList();
     String name;
     @Override
@@ -45,7 +48,8 @@ public class MyBookingsFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback( this,new OnBackPressedCallback(true){
             @Override
             public void handleOnBackPressed() {
-                Navigation.findNavController(getView()).navigateUp();
+                Toast.makeText(getContext(), "please logout to Exit",Toast.LENGTH_SHORT).show();
+
             }
         });
     }
@@ -63,6 +67,7 @@ public class MyBookingsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
         name = sp.getString("name", "error");
+        adapter = new BookingAdapter(sp.getString("userType","error"),getContext());
         binding.rcMyBooking.setLayoutManager(new LinearLayoutManager(requireContext()));
         showData();
 
@@ -89,13 +94,14 @@ public class MyBookingsFragment extends Fragment {
                             Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodName"));
                             Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodPrice"));*/
                             bookingList.add(new BookingModel(
+                                    queryDocumentSnapshots.getDocuments().get(i).getId(),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("doc_name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("patient_name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("tokenNo"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("patient_phone"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("bookingDate"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("bookingType"),
-                                    queryDocumentSnapshots.getDocuments().get(i).getString("dept_name")
+                                    queryDocumentSnapshots.getDocuments().get(i).getString("dept_name"),""
 
                             ));
                         }

@@ -1,41 +1,23 @@
 package uk.ac.tees.W9581934.Models;
 
 public class DoctorListModel {
-    String doc_id,doctorName,departmentName,specializedStream,dob,age,consultingTime,availabilityDays,
-            userName,mobileNumber,type,doctorImage,password,experience,endtime;
+    String userId, name, departmentName, specializedStream, dob, age, consultingTime, availabilityDays,
+            username, phone, type, doctorImage, password, experience, endtime;
 
-    public DoctorListModel(String doc_id, String doctorName, String departmentName, String specializedStream, String dob, String age, String consultingTime, String availabilityDays, String userName, String mobileNumber, String type, String doctorImage, String password, String experience, String endtime) {
-        this.doc_id = doc_id;
-        this.doctorName = doctorName;
-        this.departmentName = departmentName;
-        this.specializedStream = specializedStream;
-        this.dob = dob;
-        this.age = age;
-        this.consultingTime = consultingTime;
-        this.availabilityDays = availabilityDays;
-        this.userName = userName;
-        this.mobileNumber = mobileNumber;
-        this.type = type;
-        this.doctorImage = doctorImage;
-        this.password = password;
-        this.experience = experience;
-        this.endtime = endtime;
+    public String getUserId() {
+        return userId;
     }
 
-    public String getDoc_id() {
-        return doc_id;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public void setDoc_id(String doc_id) {
-        this.doc_id = doc_id;
+    public String getName() {
+        return name;
     }
 
-    public String getDoctorName() {
-        return doctorName;
-    }
-
-    public void setDoctorName(String doctorName) {
-        this.doctorName = doctorName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDepartmentName() {
@@ -86,20 +68,20 @@ public class DoctorListModel {
         this.availabilityDays = availabilityDays;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getMobileNumber() {
-        return mobileNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setMobileNumber(String mobileNumber) {
-        this.mobileNumber = mobileNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getType() {
@@ -139,6 +121,24 @@ public class DoctorListModel {
     }
 
     public void setEndtime(String endtime) {
+        this.endtime = endtime;
+    }
+
+    public DoctorListModel(String userId, String name, String departmentName, String specializedStream, String dob, String age, String consultingTime, String availabilityDays, String username, String phone, String type, String doctorImage, String password, String experience, String endtime) {
+        this.userId = userId;
+        this.name = name;
+        this.departmentName = departmentName;
+        this.specializedStream = specializedStream;
+        this.dob = dob;
+        this.age = age;
+        this.consultingTime = consultingTime;
+        this.availabilityDays = availabilityDays;
+        this.username = username;
+        this.phone = phone;
+        this.type = type;
+        this.doctorImage = doctorImage;
+        this.password = password;
+        this.experience = experience;
         this.endtime = endtime;
     }
 }

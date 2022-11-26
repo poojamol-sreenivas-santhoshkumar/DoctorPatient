@@ -54,7 +54,11 @@
         android:id="@+id/registerDoctorFragment"
         android:name="uk.ac.tees.W9581934.Admin.RegisterDoctorFragment"
         android:label="fragment_register_doctor"
-        tools:layout="@layout/fragment_register_doctor" />
+        tools:layout="@layout/fragment_register_doctor" >
+        <action
+            android:id="@+id/action_registerDoctorFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/userHomeFragment"
         android:name="uk.ac.tees.W9581934.Patient.UserHomeFragment"
@@ -83,37 +87,73 @@
         <action
             android:id="@+id/action_adminHomeFragment_to_add_ViewDepartments"
             app:destination="@id/add_ViewDepartments" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/doctorHomeFragment"
         android:name="uk.ac.tees.W9581934.Doctor.DoctorHomeFragment"
         android:label="fragment_doctor_home"
-        tools:layout="@layout/fragment_doctor_home" />
+        tools:layout="@layout/fragment_doctor_home" >
+        <action
+            android:id="@+id/action_doctorHomeFragment_self"
+            app:destination="@id/doctorHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/doctorListFragment"
         android:name="uk.ac.tees.W9581934.Admin.DoctorListFragment"
         android:label="fragment_doctor_list"
-        tools:layout="@layout/fragment_doctor_list" />
+        tools:layout="@layout/fragment_doctor_list" >
+        <action
+            android:id="@+id/action_doctorListFragment_self"
+            app:destination="@id/doctorListFragment" />
+        <action
+            android:id="@+id/action_doctorListFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/patientListFragment"
         android:name="uk.ac.tees.W9581934.Admin.PatientListFragment"
         android:label="fragment_patient_list"
-        tools:layout="@layout/fragment_patient_list" />
+        tools:layout="@layout/fragment_patient_list" >
+        <action
+            android:id="@+id/action_patientListFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookingListFragment"
         android:name="uk.ac.tees.W9581934.Admin.BookingListFragment"
         android:label="fragment_booking_list"
-        tools:layout="@layout/fragment_booking_list" />
+        tools:layout="@layout/fragment_booking_list" >
+        <action
+            android:id="@+id/action_bookingListFragment_self"
+            app:destination="@id/bookingListFragment" />
+        <action
+            android:id="@+id/action_bookingListFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/feedbackFragment"
         android:name="uk.ac.tees.W9581934.Admin.FeedbackFragment"
         android:label="fragment_feedback"
-        tools:layout="@layout/fragment_feedback" />
+        tools:layout="@layout/fragment_feedback" >
+        <action
+            android:id="@+id/action_feedbackFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/add_ViewDepartments"
         android:name="uk.ac.tees.W9581934.Admin.Add_ViewDepartments"
         android:label="fragment_add__view_departments"
-        tools:layout="@layout/fragment_add__view_departments" />
+        tools:layout="@layout/fragment_add__view_departments" >
+        <action
+            android:id="@+id/action_add_ViewDepartments_self"
+            app:destination="@id/add_ViewDepartments" />
+        <action
+            android:id="@+id/action_add_ViewDepartments_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+    </fragment>
     <fragment
         android:id="@+id/patientHome"
         android:name="uk.ac.tees.W9581934.Patient.PatientHome"
@@ -123,7 +163,17 @@
         android:id="@+id/doctorDashboard"
         android:name="uk.ac.tees.W9581934.Doctor.DoctorDashboard"
         android:label="fragment_doctor_dashboard"
-        tools:layout="@layout/fragment_doctor_dashboard" />
+        tools:layout="@layout/fragment_doctor_dashboard" >
+        <action
+            android:id="@+id/action_doctorDashboard_self"
+            app:destination="@id/doctorDashboard" />
+        <action
+            android:id="@+id/action_doctorDashboard_to_chatFragmentDoctor"
+            app:destination="@id/chatFragmentDoctor" />
+        <action
+            android:id="@+id/action_doctorDashboard_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookingPageFragment"
         android:name="uk.ac.tees.W9581934.Patient.BookingPageFragment"
@@ -137,6 +187,17 @@
         <action
             android:id="@+id/action_bookDoctor2_to_bookingPageFragment"
             app:destination="@id/bookingPageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragmentDoctor"
+        android:name="uk.ac.tees.W9581934.Doctor.ChatFragmentDoctor"
+        android:label="fragment_chat_doctor"
+        tools:layout="@layout/fragment_chat_doctor" >
+        <argument
+            android:name="cdate"
+            android:defaultValue="null"
+            app:nullable="true"
+            app:argType="string"/>
     </fragment>
 
 </navigation>

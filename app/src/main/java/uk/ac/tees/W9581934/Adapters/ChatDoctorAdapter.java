@@ -25,14 +25,15 @@ import java.util.List;
 import uk.ac.tees.W9581934.Models.BookingModel;
 import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.BookingCardBinding;
+import uk.ac.tees.W9581934.databinding.ChatdoctorCardBinding;
 
-public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHolder> {
+public class ChatDoctorAdapter extends RecyclerView.Adapter<ChatDoctorAdapter.MyviewHolder> {
     public List<BookingModel> bookingList;
-    BookingCardBinding binding;
+    ChatdoctorCardBinding binding;
     Context ctx;
     String type;
 
-    public BookingAdapter(String type, Context context) {
+    public ChatDoctorAdapter(String type, Context context) {
         this.ctx = context;
         this.type = type;
     }
@@ -40,25 +41,20 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
 
     @NonNull
     @Override
-    public BookingAdapter.MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ChatDoctorAdapter.MyviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        binding = BookingCardBinding.inflate(
+        binding = ChatdoctorCardBinding.inflate(
                 LayoutInflater.from(parent.getContext()),
                 parent,
                 false
         );
-        return new BookingAdapter.MyviewHolder(binding);
+        return new ChatDoctorAdapter.MyviewHolder(binding);
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BookingAdapter.MyviewHolder holder, int position) {
-        if (type.equals("admin")) {
-            holder.btncancel.setText("Delete\n Booking");
+    public void onBindViewHolder(@NonNull ChatDoctorAdapter.MyviewHolder holder, int position) {
 
-        }
-        else if (type.equals("doctor")) {
-            holder.btncancel.setText("Remove from\n Queue");
             binding.getRoot().setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -67,7 +63,6 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
             });
             //holder.btncancel.setVisibility(View.GONE);
 
-        }
 
         BookingModel dm = bookingList.get(position);
         holder.tvrname.setText(dm.getDoc_name());
@@ -77,32 +72,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
         holder.tvbookingType.setText(dm.getBookingType());
         holder.tvbookingDpt.setText("[" + dm.getDept_name() + "]");
         holder.token.setText(dm.getTokenNo());
-        holder.btncancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder alertbox = new AlertDialog.Builder(view.getRootView().getContext());
-                alertbox.setMessage("Do you really wants to cancel/remove this booking?");
-                alertbox.setTitle("Cancel!!");
 
-                alertbox.setPositiveButton("Cancel Booking", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteBooking(dm.getDoc_id(), view);
-
-                    }
-                });
-                alertbox.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-
-                alertbox.show();
-
-
-            }
-        });
 
     }
 
@@ -116,10 +86,10 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
         ImageView docImageView;
         Button btncancel;
 
-        public MyviewHolder(@NonNull BookingCardBinding binding) {
+        public MyviewHolder(@NonNull ChatdoctorCardBinding binding) {
             super(binding.getRoot());
             tvrname = binding.tvDr;
-            btncancel = binding.btncancel;
+           // btncancel = binding.btncancel;
             tvPatientPhone = binding.tvPatientPhone;
             tvPatientName = binding.tvPatientName;
             tvbookingDate = binding.tvBookingDate;
@@ -156,7 +126,7 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
                             Navigation.findNavController(view).navigate(R.id.action_myBookingsFragment_self);
                             Toast.makeText(view.getRootView().getContext(), "Booking Cancelled successfully", Toast.LENGTH_SHORT).show();
                         }
-                        }
+                    }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {

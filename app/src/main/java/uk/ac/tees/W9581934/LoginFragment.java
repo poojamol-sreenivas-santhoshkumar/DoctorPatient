@@ -10,6 +10,7 @@ import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -53,7 +54,16 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(getLayoutInflater(), container, false);
         return binding.getRoot();
     }
-
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+               requireActivity().finish();
+            }
+        });
+    }
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -104,11 +114,12 @@ public class LoginFragment extends Fragment {
                                                 } else {
                                                     sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
                                                     editor = sp.edit();
-                                                    Log.d("##", queryDocumentSnapshots.getDocuments().get(0).getString("type") + "");
-                                                    editor.putString("userType", queryDocumentSnapshots.getDocuments().get(0).getString("type"));
-                                                    editor.putString("name", queryDocumentSnapshots.getDocuments().get(0).getString("name"));
-                                                    editor.putString("mobile", queryDocumentSnapshots.getDocuments().get(0).getString("phone"));
-                                                    editor.putString("userId", queryDocumentSnapshots.getDocuments().get(0).getString("userId"));
+
+                                                    Log.d("##", queryDocumentSnapshots.getDocuments().get(0).getString("userId") + "");
+                                                        editor.putString("userType", queryDocumentSnapshots.getDocuments().get(0).getString("type"));
+                                                        editor.putString("name", queryDocumentSnapshots.getDocuments().get(0).getString("name"));
+                                                        editor.putString("mobile", queryDocumentSnapshots.getDocuments().get(0).getString("phone"));
+                                                        editor.putString("userId", queryDocumentSnapshots.getDocuments().get(0).getString("userId"));
                                                     editor.commit();
 
                                                     if (queryDocumentSnapshots.getDocuments().get(0).getString("type").equals("patient")) {
