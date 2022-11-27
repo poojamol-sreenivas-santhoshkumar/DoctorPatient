@@ -42,12 +42,8 @@ public class Add_ViewDepartments extends Fragment {
     FragmentAddViewDepartmentsBinding binding;
     DeptAdapter adapter = new DeptAdapter();
     List<DeptModel> deptlist = new ArrayList();
-   // FirebaseStorage firebaseStorage;
-   // StorageReference storageReference;
-
     ProgressDialog progressDoalog;
     private ProgressBar progressbar;
-    //private FirebaseAuth mAuth;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,9 +67,6 @@ public class Add_ViewDepartments extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-//        for(int i=0;i<10;i++) {
-//            deptlist.add(new DeptModel("Cardiology", i));
-//        }
         binding.rvDepartments.setLayoutManager(new LinearLayoutManager(requireContext()));
         showData();
         binding.btnFind.setOnClickListener(new View.OnClickListener() {
@@ -121,6 +114,11 @@ public class Add_ViewDepartments extends Fragment {
     }
 
     private void showData() {
+        progressDoalog = new ProgressDialog(requireContext());
+        progressDoalog.setMessage("Checking....");
+        progressDoalog.setTitle("Please wait");
+        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.show();
         //Log.d("@", "showData: Called")
         deptlist.clear();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -151,6 +149,7 @@ public class Add_ViewDepartments extends Fragment {
                             Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                         }
                     });
+            progressDoalog.dismiss();
         } catch (Exception e) {
 
         }

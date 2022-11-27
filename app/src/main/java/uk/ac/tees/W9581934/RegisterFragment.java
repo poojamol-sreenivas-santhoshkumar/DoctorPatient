@@ -26,6 +26,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.Random;
 
 import uk.ac.tees.W9581934.Models.PatientModel;
+import uk.ac.tees.W9581934.Models.Validation;
 import uk.ac.tees.W9581934.databinding.FragmentRegisterBinding;
 
 
@@ -69,12 +70,14 @@ public class RegisterFragment extends Fragment {
         binding.btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (binding.etName.getText().toString().isEmpty())
+                if (binding.etName.getText().toString().isEmpty() ||
+                        !binding.etName.getText().toString().matches(Validation.text))
                     binding.etName.setError("Enter your name");
-                else if (binding.etAge.getText().toString().isEmpty())
+                else if (binding.etAge.getText().toString().isEmpty()|| binding.etAge.getText().toString().length()>2)
                     binding.etAge.setError("Enter your Age");
-                else if (binding.etPhone.getText().toString().isEmpty())
-                    binding.etPhone.setError("Enter your valid phone number");
+                else if (binding.etPhone.getText().toString().isEmpty() || binding.etPhone.getText().toString().length()>10
+                || binding.etPhone.getText().toString().length()<10)
+                    binding.etPhone.setError("Enter your valid 10 digit phone number");
                 else if (binding.etAddress.getText().toString().isEmpty())
                     binding.etAddress.setError("Enter your address");
                 else if (binding.etUsername.getText().toString().isEmpty())

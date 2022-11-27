@@ -78,7 +78,7 @@ public class BookingPageFragment extends Fragment {
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
         name = sp.getString("name", "error");
         mobile = sp.getString("mobile", "error");
-        userId = sp.getString("userId", "");
+        userId = sp.getString("userId", "error");
         Log.d("##", userId);
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override

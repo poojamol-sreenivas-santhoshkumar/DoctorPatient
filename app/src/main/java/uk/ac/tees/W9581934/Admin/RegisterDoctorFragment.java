@@ -48,6 +48,7 @@ import java.util.Random;
 import uk.ac.tees.W9581934.Adapters.CallBackTwice;
 import uk.ac.tees.W9581934.Models.DoctorListModel;
 import uk.ac.tees.W9581934.Models.PatientModel;
+import uk.ac.tees.W9581934.Models.Validation;
 import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.FragmentFeedbackBinding;
 import uk.ac.tees.W9581934.databinding.FragmentRegisterDoctorBinding;
@@ -127,9 +128,10 @@ public class RegisterDoctorFragment extends Fragment implements  CallBackTwice {
             public void onClick(View view) {
                 if (binding.etDocId.getText().toString().isEmpty())
                     binding.etDocId.setError("Enter a Unique Id for this new Doctor");
-                else if (binding.etDocName.getText().toString().isEmpty())
+                else if (binding.etDocName.getText().toString().isEmpty()||
+                !binding.etDocName.getText().toString().matches(Validation.text))
                     binding.etDocName.setError("Enter doctor name");
-                else if (binding.etDocAge.getText().toString().isEmpty())
+                else if (binding.etDocAge.getText().toString().isEmpty()||binding.etDocAge.getText().toString().length()<2)
                     binding.etDocAge.setError("Enter doctor age");
                 else if (binding.etDocDob.getText().toString().isEmpty())
                     binding.etDocDob.setError("Enter a doctor date of birth");
@@ -139,13 +141,15 @@ public class RegisterDoctorFragment extends Fragment implements  CallBackTwice {
                     binding.etSpecialization.setError("Enter Specialization");
                 else if (binding.etExperience.getText().toString().isEmpty())
                     binding.etExperience.setError("Enter no of working experience");
-                else if (binding.etDocMobile.getText().toString().isEmpty())
+                else if (binding.etDocMobile.getText().toString().isEmpty()|| binding.etDocMobile.getText().toString().length()>10
+                        || binding.etDocMobile.getText().toString().length()<10)
                     binding.etDocMobile.setError("Enter doctor mobile number");
                 else if (binding.Time.getText().toString().isEmpty())
                     binding.Time.setError("Enter doctor consultation start time");
                 else if (binding.endTime.getText().toString().isEmpty())
                     binding.endTime.setError("Enter doctor consultation end time");
-                else if (binding.etDocDays.getText().toString().isEmpty())
+                else if (binding.etDocDays.getText().toString().isEmpty()
+                || !binding.etDocDays.getText().toString().matches(Validation.text))
                     binding.etDocDays.setError("Enter doctor Available days");
                 else if (binding.etDocUsername.getText().toString().isEmpty())
                     binding.etDocUsername.setError("Enter doctor username");

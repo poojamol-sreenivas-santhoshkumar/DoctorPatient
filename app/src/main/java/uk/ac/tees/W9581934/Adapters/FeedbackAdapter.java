@@ -35,8 +35,8 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.Myview
     @Override
     public void onBindViewHolder(@NonNull FeedbackAdapter.MyviewHolder holder, int position) {
         FeedbackModel dm = feedList.get(position);
-        holder.pname.setText(dm.getPname());
-        holder.feedback.setText(dm.getFeedback());
+        holder.pname.setText("Patient Name\t:\t"+dm.getPname());
+        holder.feedback.setText("Feedback\t\t\t\t\t\t\t:\t"+dm.getFeedback());
 
     }
 
