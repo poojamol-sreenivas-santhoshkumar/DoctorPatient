@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,23 +54,29 @@ public class BookingAdapter extends RecyclerView.Adapter<BookingAdapter.MyviewHo
 
     @Override
     public void onBindViewHolder(@NonNull BookingAdapter.MyviewHolder holder, int position) {
+        BookingModel dm = bookingList.get(position);
         if (type.equals("admin")) {
             holder.btncancel.setText("Delete\n Booking");
 
         }
         else if (type.equals("doctor")) {
             holder.btncancel.setText("Remove from\n Queue");
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getRootView().getContext(),"Add chat fragment",Toast.LENGTH_SHORT).show();
-                }
-            });
+            if (dm.getBookingType().equals("Online")) {
+                binding.getRoot().setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Bundle b=new Bundle();
+                        b.putString("dataid",dm.getDoc_id());
+                        b.putString("dataname",dm.getPatient_name());
+                       Navigation.findNavController(view).navigate(R.id.action_chatFragmentDoctor_to_doctorChatHome,b);
+                    }
+                });
+            }
             //holder.btncancel.setVisibility(View.GONE);
 
         }
 
-        BookingModel dm = bookingList.get(position);
+
         holder.tvrname.setText(dm.getDoc_name());
         holder.tvPatientName.setText(dm.getPatient_name());
         holder.tvPatientPhone.setText(dm.getPatient_phone());

@@ -65,7 +65,7 @@ public class BookingPageFragment extends Fragment {
         SharedPreferences doctor = getContext().getSharedPreferences("dr", Context.MODE_PRIVATE);
         drname = doctor.getString("drname", "error");
         drdpt = doctor.getString("drdpt", "error");
-        docId = doctor.getString("docid", "error");
+        docId = doctor.getString("doctorDocId", "error");
         binding.etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,12 +73,11 @@ public class BookingPageFragment extends Fragment {
             }
         });
 
-
         //getting user details
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
         name = sp.getString("name", "error");
         mobile = sp.getString("mobile", "error");
-        userId = sp.getString("userId", "error");
+        userId = sp.getString("userDocID", "error");
         Log.d("##", userId);
         binding.btnBookNow.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -176,6 +175,7 @@ public class BookingPageFragment extends Fragment {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Checking....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         Log.d("call", "fn-inside ");

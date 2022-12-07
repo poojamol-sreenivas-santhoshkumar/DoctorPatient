@@ -11,12 +11,12 @@
         android:id="@+id/btncheck"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:src="@drawable/doc"
         android:layout_marginTop="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintTop_toTopOf="@+id/c" />
+   <!-- android:src="@drawable/doc"-->
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

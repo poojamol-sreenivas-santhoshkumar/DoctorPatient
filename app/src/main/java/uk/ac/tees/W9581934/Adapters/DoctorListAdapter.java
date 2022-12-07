@@ -12,7 +12,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
@@ -24,6 +23,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -76,11 +76,16 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
         holder.days.setText(dm.getAvailabilityDays());
         holder.username.setText(dm.getUsername());
         holder.mobile.setText(dm.getPhone());
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        byte[] imageBytes = baos.toByteArray();
-        imageBytes = Base64.decode(dm.getDoctorImage(), Base64.DEFAULT);
-        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        holder.ivphoto.setImageBitmap(decodedImage);
+        try {
+            Log.d("##", dm.getDoctorImage());
+            Glide.with(ctx)
+                    .load(dm.getDoctorImage())
+                    .into(holder.ivphoto);
+        }
+        catch (Exception e){
+
+        }
+
         holder.btnbook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -92,6 +97,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
                 ed.putString("drname",dm.getName());
                 ed.putString("drdpt",dm.getDepartmentName());
                 ed.putString("docid",dm.getUserId());
+                ed.putString("doctorDocId",dm.getDoctorDocId());
                 ed.commit();
                 Navigation.findNavController(view).navigate(R.id.action_bookDoctor_to_bookingPageFragment2);
                 //  mAdapterCallback.onMethodCallback();
@@ -107,7 +113,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
                 alertbox.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteDoctor(dm.getUserId(), view);
+                        deleteDoctor(dm.getUserId(),dm.getName(), view);
 
                     }
                 });
@@ -211,7 +217,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
             notifyDataSetChanged();
         }
     };
-    private void deleteDoctor(String doc_name, View view) {
+    private void deleteDoctor(String doc_name, String name, View view) {
         //Log.d("@", "showData: Called")
 
         final ProgressDialog progressDoalog = new ProgressDialog(view.getRootView().getContext());
@@ -225,7 +231,7 @@ public class DoctorListAdapter extends RecyclerView.Adapter<DoctorListAdapter.My
                     @Override
                     public void onSuccess(Void unused) {
                         Navigation.findNavController(view).navigate(R.id.action_doctorListFragment_self);
-                        Toast.makeText(view.getRootView().getContext(), "Doctor removed successfully",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(view.getRootView().getContext(), name+" removed successfully",Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

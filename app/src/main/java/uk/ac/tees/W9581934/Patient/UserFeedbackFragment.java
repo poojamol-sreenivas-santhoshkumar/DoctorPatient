@@ -84,6 +84,7 @@ public class UserFeedbackFragment extends Fragment {
         progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Submitting....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         String feedback;
@@ -98,8 +99,8 @@ public class UserFeedbackFragment extends Fragment {
                 addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
-                        progressDoalog.dismiss();
                         binding.etFeedback.setText("");
+                        progressDoalog.dismiss();
                         Snackbar.make(requireView(), "Feedback send Successfully", Snackbar.LENGTH_LONG).show();
                     }
                 }).

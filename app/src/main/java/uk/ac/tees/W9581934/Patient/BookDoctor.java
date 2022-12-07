@@ -40,7 +40,7 @@ public class BookDoctor extends Fragment {
     FragmentUserBookingBinding binding;
     DoctorListAdapter adapter;
     List<DoctorListModel> DoctorList = new ArrayList();
-    public List<DoctorListModel> exampleListFull= new ArrayList();;
+    public List<DoctorListModel> exampleListFull= new ArrayList();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,6 +85,7 @@ public class BookDoctor extends Fragment {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -101,6 +102,7 @@ public class BookDoctor extends Fragment {
                         for (i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++) {
 
                             DoctorList.add(new DoctorListModel(
+                                    queryDocumentSnapshots.getDocuments().get(i).getId(),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("userId"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("departmentName"),
@@ -117,6 +119,15 @@ public class BookDoctor extends Fragment {
                                     queryDocumentSnapshots.getDocuments().get(i).getString("experience"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("endtime")
                             ));
+                        }
+                        if (DoctorList.isEmpty()){
+                            binding.rcDoctors.setVisibility(View.GONE);
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.rcDoctors.setVisibility(View.VISIBLE);
+                            binding.labelNoData.setVisibility(View.INVISIBLE);
                         }
                         progressDoalog.dismiss();
                     //    Log.d("@",  DoctorList+"");

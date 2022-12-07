@@ -63,13 +63,14 @@ public class PatientListFragment extends Fragment implements AdapterCallback {
 //            PatientList.add(new PatientModel("manu","22","9747062356" ,"no.20,rosevilla"));
 //        }
         binding.rvPatients.setLayoutManager(new LinearLayoutManager(requireContext()));
-      showData();
+       showData();
 
     }
     private void showData() {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -97,6 +98,15 @@ public class PatientListFragment extends Fragment implements AdapterCallback {
                                     queryDocumentSnapshots.getDocuments().get(i).getString("username"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("password")
                             ));
+                        }
+                        if (PatientList.isEmpty()){
+                            binding.rvPatients.setVisibility(View.GONE);
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.rvPatients.setVisibility(View.VISIBLE);
+                            binding.labelNoData.setVisibility(View.INVISIBLE);
                         }
                         progressDoalog.dismiss();
                         adapter.patientList=PatientList;

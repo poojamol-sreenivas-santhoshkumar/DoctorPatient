@@ -55,11 +55,12 @@ public class FeedbackFragment extends Fragment {
 //            feedbackList.add(new FeedbackModel("manu","Good Service"));
 //        }
         binding.rvFeedbacks.setLayoutManager(new LinearLayoutManager(requireContext()));
-       showData();
+         showData();
     }
     private void showData() {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
+        progressDoalog.setCancelable(false);
         progressDoalog.setTitle("Please wait");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
@@ -82,6 +83,15 @@ public class FeedbackFragment extends Fragment {
                                     queryDocumentSnapshots.getDocuments().get(i).getString("pname"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("feedback")
                             ));
+                        }
+                        if (feedbackList.isEmpty()){
+                            binding.rvFeedbacks.setVisibility(View.GONE);
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.rvFeedbacks.setVisibility(View.VISIBLE);
+                            binding.labelNoData.setVisibility(View.INVISIBLE);
                         }
                         progressDoalog.dismiss();
                         adapter.feedList=feedbackList;

@@ -11,8 +11,8 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash" >
         <action
-            android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            android:id="@+id/action_splashFragment_to_chooseFragment"
+            app:destination="@id/chooseFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -63,7 +63,11 @@
         android:id="@+id/userHomeFragment"
         android:name="uk.ac.tees.W9581934.Patient.UserHomeFragment"
         android:label="fragment_user_home"
-        tools:layout="@layout/fragment_user_home" />
+        tools:layout="@layout/fragment_user_home" >
+        <action
+            android:id="@+id/action_userHomeFragment_to_chooseFragment"
+            app:destination="@id/chooseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/adminHomeFragment"
         android:name="uk.ac.tees.W9581934.Admin.AdminHomeFragment"
@@ -90,6 +94,9 @@
         <action
             android:id="@+id/action_adminHomeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_chooseFragment"
+            app:destination="@id/chooseFragment" />
     </fragment>
     <fragment
         android:id="@+id/doctorHomeFragment"
@@ -99,6 +106,9 @@
         <action
             android:id="@+id/action_doctorHomeFragment_self"
             app:destination="@id/doctorHomeFragment" />
+        <action
+            android:id="@+id/action_doctorHomeFragment_to_chooseFragment"
+            app:destination="@id/chooseFragment" />
     </fragment>
     <fragment
         android:id="@+id/doctorListFragment"
@@ -158,7 +168,11 @@
         android:id="@+id/patientHome"
         android:name="uk.ac.tees.W9581934.Patient.PatientHome"
         android:label="fragment_patient_home"
-        tools:layout="@layout/fragment_patient_home" />
+        tools:layout="@layout/fragment_patient_home" >
+        <action
+            android:id="@+id/action_patientHome_to_chooseFragment"
+            app:destination="@id/chooseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/doctorDashboard"
         android:name="uk.ac.tees.W9581934.Doctor.DoctorDashboard"
@@ -173,6 +187,9 @@
         <action
             android:id="@+id/action_doctorDashboard_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_doctorDashboard_to_chooseFragment"
+            app:destination="@id/chooseFragment" />
     </fragment>
     <fragment
         android:id="@+id/bookingPageFragment"
@@ -198,6 +215,50 @@
             android:defaultValue="null"
             app:nullable="true"
             app:argType="string"/>
+        <action
+            android:id="@+id/action_chatFragmentDoctor_to_doctorChatHome"
+            app:destination="@id/doctorChatHome" />
+        <action
+            android:id="@+id/action_chatFragmentDoctor_self"
+            app:destination="@id/chatFragmentDoctor" />
+        <action
+            android:id="@+id/action_chatFragmentDoctor_to_doctorDashboard"
+            app:destination="@id/doctorDashboard" />
+    </fragment>
+    <fragment
+        android:id="@+id/chooseFragment"
+        android:name="uk.ac.tees.W9581934.ChooseFragment"
+        android:label="fragment_choose"
+        tools:layout="@layout/fragment_choose" >
+        <argument
+            android:name="userType"
+            android:defaultValue="null"
+            app:nullable="true"
+            app:argType="string"/>
+
+        <action
+            android:id="@+id/action_chooseFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/doctorChatHome"
+        android:name="uk.ac.tees.W9581934.Doctor.DoctorChatHome"
+        android:label="fragment_doctor_chat_home"
+        tools:layout="@layout/fragment_doctor_chat_home" >
+        <action
+            android:id="@+id/action_doctorChatHome_to_imageDisplay"
+            app:destination="@id/imageDisplay" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageDisplay"
+        android:name="uk.ac.tees.W9581934.ImageDisplay"
+        android:label="fragment_image_display"
+        tools:layout="@layout/fragment_image_display">
+        <argument
+            android:name="image"
+            app:argType="string"
+            app:nullable="true"
+            />
     </fragment>
 
 </navigation>

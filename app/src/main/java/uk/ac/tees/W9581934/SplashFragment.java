@@ -35,7 +35,7 @@ public class SplashFragment extends Fragment {
         binding.btnbext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_loginFragment);
+                Navigation.findNavController(view).navigate(R.id.action_splashFragment_to_chooseFragment);
             }
         });
 

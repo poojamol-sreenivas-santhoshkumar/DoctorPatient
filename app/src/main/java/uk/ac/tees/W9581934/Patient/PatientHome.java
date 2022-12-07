@@ -41,8 +41,6 @@ public class PatientHome extends Fragment {
             public void handleOnBackPressed() {
                 Toast.makeText(getContext(), "please logout to Exit",Toast.LENGTH_SHORT).show();
 
-
-
             }
         });
     }
@@ -64,7 +62,7 @@ public class PatientHome extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Navigation.findNavController(getView()).navigateUp();
+                        Navigation.findNavController(view).navigate(R.id.action_patientHome_to_chooseFragment);
 
                     }
                 });

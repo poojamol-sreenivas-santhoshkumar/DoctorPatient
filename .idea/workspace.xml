@@ -4,10 +4,46 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe7443ff-bca9-4178-89aa-3f2522a0f76d" name="Changes" comment="Validations Done">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_11_22,_10_15_PM_[Changes]/shelved.patch" beforeDir="false" />
+    <list default="true" id="fe7443ff-bca9-4178-89aa-3f2522a0f76d" name="Changes" comment="Chat Feature Added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/BookingAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/BookingAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/ChatDoctorAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/ChatDoctorAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/DeptAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/DeptAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/DoctorListAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Adapters/DoctorListAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/Add_ViewDepartments.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/Add_ViewDepartments.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/AdminHomeFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/AdminHomeFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/BookingListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/BookingListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/DoctorListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/DoctorListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/FeedbackFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/FeedbackFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/PatientListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/PatientListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/RegisterDoctorFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Admin/RegisterDoctorFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Doctor/ChatFragmentDoctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Doctor/ChatFragmentDoctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Doctor/DoctorDashboard.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Doctor/DoctorDashboard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/LoginFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/LoginFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Models/DoctorListModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Models/DoctorListModel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Models/Validation.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Models/Validation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/BookDoctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/BookDoctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/BookingPageFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/BookingPageFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/ChatWithdoctor.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/ChatWithdoctor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/MyBookingsFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/MyBookingsFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/PatientHome.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/PatientHome.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/UserFeedbackFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/Patient/UserFeedbackFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/RegisterFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/RegisterFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/SplashFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/uk/ac/tees/W9581934/SplashFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_booking_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_booking_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_doctor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_chat_doctor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_doctor_dashboard.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_doctor_dashboard.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_doctor_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_doctor_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feedback.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_feedback.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_login.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_bookings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_my_bookings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_patient_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_patient_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register_doctor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_register_doctor.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_booking.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/fragment_user_booking.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/homenav.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/homenav.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/navigation/navgraph.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/navigation/navgraph.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -157,7 +193,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669546545153</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Chat Feature Added">
+      <created>1670403021812</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1670403021812</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +219,7 @@
     <MESSAGE value="Second Commit : DB integrated" />
     <MESSAGE value="Delete doctor,bookings,departments etc-done" />
     <MESSAGE value="Validations Done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Validations Done" />
+    <MESSAGE value="Chat Feature Added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Chat Feature Added" />
   </component>
 </project>

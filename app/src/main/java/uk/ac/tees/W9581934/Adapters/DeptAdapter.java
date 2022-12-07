@@ -16,15 +16,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.snackbar.Snackbar;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.List;
 
 import uk.ac.tees.W9581934.Models.DeptModel;
-import uk.ac.tees.W9581934.Models.DoctorListModel;
 import uk.ac.tees.W9581934.R;
 import uk.ac.tees.W9581934.databinding.DepartmentCardBinding;
-import uk.ac.tees.W9581934.databinding.DoctorCardBinding;
 
 public class DeptAdapter extends RecyclerView.Adapter<DeptAdapter.MyviewHolder> {
     public List<DeptModel> deptlist;
@@ -57,7 +56,7 @@ public class DeptAdapter extends RecyclerView.Adapter<DeptAdapter.MyviewHolder> 
                 alertbox.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        deleteDepartment(dm.getDept_id(), view);
+                        deleteDepartment(dm.getDept_id(),dm.getDname(), view);
 
                     }
                 });
@@ -89,7 +88,7 @@ public class DeptAdapter extends RecyclerView.Adapter<DeptAdapter.MyviewHolder> 
         }
     }
 
-    private void deleteDepartment(String doc_name, View view) {
+    private void deleteDepartment(String doc_name, String dname, View view) {
         //Log.d("@", "showData: Called")
 
         final ProgressDialog progressDoalog = new ProgressDialog(view.getRootView().getContext());
@@ -103,7 +102,8 @@ public class DeptAdapter extends RecyclerView.Adapter<DeptAdapter.MyviewHolder> 
                     @Override
                     public void onSuccess(Void unused) {
                         Navigation.findNavController(view).navigate(R.id.action_add_ViewDepartments_self);
-                        Toast.makeText(view.getRootView().getContext(), "Department removed successfully", Toast.LENGTH_SHORT).show();
+                        Snackbar.make(view,dname+" removed successfully",Snackbar.LENGTH_LONG).show();
+                        //Toast.makeText(view.getRootView().getContext(), dname+" removed successfully", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

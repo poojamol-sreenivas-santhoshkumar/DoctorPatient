@@ -38,7 +38,7 @@ import uk.ac.tees.W9581934.databinding.FragmentDoctorDashboardBinding;
 public class ChatFragmentDoctor extends Fragment {
     String dic_id,cdate;
     FragmentChatDoctorBinding binding;
-    BookingAdapter adapter;
+    OnlineBookingAdapter adapter;
     List<BookingModel> bookingList = new ArrayList();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,7 +47,8 @@ public class ChatFragmentDoctor extends Fragment {
             @Override
             public void handleOnBackPressed() {
 
-                        Navigation.findNavController(getView()).navigateUp();
+                       // Navigation.findNavController(getView()).navigate(R.id.action_chatFragmentDoctor_to_doctorChatHome);
+                        Navigation.findNavController(getView()).navigate(R.id.action_chatFragmentDoctor_to_doctorDashboard);
             }
         });
     }
@@ -64,8 +65,8 @@ public class ChatFragmentDoctor extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-        dic_id = sp.getString("userId", "error");
-        adapter = new BookingAdapter(sp.getString("userType", "error"), getContext());
+        dic_id = sp.getString("userDocID", "error");
+        adapter = new OnlineBookingAdapter(sp.getString("userType", "error"), getContext());
         binding.rvBookings.setLayoutManager(new LinearLayoutManager(requireContext()));
         cdate=getArguments().getString("cdate");
         Log.d("##",dic_id );
@@ -77,6 +78,7 @@ public class ChatFragmentDoctor extends Fragment {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -104,11 +106,18 @@ public class ChatFragmentDoctor extends Fragment {
 
                             ));
                         }
+                        if (bookingList.isEmpty()){
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.labelNoData.setVisibility(View.GONE);
+                        }
                         progressDoalog.dismiss();
                         Log.d("##", bookingList.size() + "");
                         adapter.bookingList = bookingList;
                         binding.rvBookings.setAdapter(adapter);
-                        adapter.notifyDataSetChanged();
+                       // adapter.notifyDataSetChanged();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

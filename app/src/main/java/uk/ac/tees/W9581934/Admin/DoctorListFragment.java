@@ -62,22 +62,24 @@ public class DoctorListFragment extends Fragment implements AdapterCallback {
         super.onViewCreated(view, savedInstanceState);
 
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-        adapter=new DoctorListAdapter(sp.getString("userType","error"), getContext());
+        adapter = new DoctorListAdapter(sp.getString("userType", "error"), getContext());
 //       for(int i=0;i<10;i++) {
 //           DoctorList.add(new DoctorListModel("Nithin", "Cardiolgy", "Cardiac Surgon", "10/04/1985", "35", "Morning 11:am to 02:00 pm", "Monday-friday", "nithin@cardiology", "9747062356", "R.drawable.doctor","doctor","","fff","fff","fff"));
 //       }
-       binding.rvDoctors.setLayoutManager(new LinearLayoutManager(requireContext()));
-      showData();
+        binding.rvDoctors.setLayoutManager(new LinearLayoutManager(requireContext()));
+        showData();
     }
 
     @Override
     public void onMethodCallback() {
 
     }
+
     private void showData() {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -95,7 +97,7 @@ public class DoctorListFragment extends Fragment implements AdapterCallback {
                             /*Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getId());
                             Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodName"));
                             Log.d("!", queryDocumentSnapshots.getDocuments().get(i).getString("foodPrice"));*/
-                            DoctorList.add(new DoctorListModel(
+                            DoctorList.add(new DoctorListModel("",
                                     queryDocumentSnapshots.getDocuments().get(i).getId(),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("departmentName"),
@@ -113,8 +115,15 @@ public class DoctorListFragment extends Fragment implements AdapterCallback {
                                     queryDocumentSnapshots.getDocuments().get(i).getString("endtime")
                             ));
                         }
+                        if (DoctorList.isEmpty()) {
+                            binding.rvDoctors.setVisibility(View.GONE);
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.rvDoctors.setVisibility(View.VISIBLE);
+                            binding.labelNoData.setVisibility(View.INVISIBLE);
+                        }
                         progressDoalog.dismiss();
-                        adapter.doctorList=DoctorList;
+                        adapter.doctorList = DoctorList;
                         binding.rvDoctors.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
                     }

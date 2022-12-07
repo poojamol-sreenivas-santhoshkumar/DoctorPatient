@@ -1,6 +1,7 @@
 package uk.ac.tees.W9581934.Admin;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import androidx.activity.OnBackPressedCallback;
@@ -8,6 +9,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +21,7 @@ import uk.ac.tees.W9581934.databinding.FragmentAdminHomeBinding;
 public class AdminHomeFragment extends Fragment {
 
     FragmentAdminHomeBinding binding;
+    ProgressDialog progressDoalog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,7 +45,7 @@ public class AdminHomeFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Navigation.findNavController(getView()).navigate(R.id.action_adminHomeFragment_to_loginFragment);
+                        Navigation.findNavController(getView()).navigate(R.id.action_adminHomeFragment_to_chooseFragment);
 
                     }
                 });

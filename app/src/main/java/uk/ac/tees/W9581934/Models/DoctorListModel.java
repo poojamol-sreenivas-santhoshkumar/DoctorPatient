@@ -1,8 +1,35 @@
 package uk.ac.tees.W9581934.Models;
 
 public class DoctorListModel {
-    String userId, name, departmentName, specializedStream, dob, age, consultingTime, availabilityDays,
+    String doctorDocId,userId, name, departmentName, specializedStream, dob, age, consultingTime, availabilityDays,
             username, phone, type, doctorImage, password, experience, endtime;
+
+    public DoctorListModel(String doctorDocId, String userId, String name, String departmentName, String specializedStream, String dob, String age, String consultingTime, String availabilityDays, String username, String phone, String type, String doctorImage, String password, String experience, String endtime) {
+        this.doctorDocId = doctorDocId;
+        this.userId = userId;
+        this.name = name;
+        this.departmentName = departmentName;
+        this.specializedStream = specializedStream;
+        this.dob = dob;
+        this.age = age;
+        this.consultingTime = consultingTime;
+        this.availabilityDays = availabilityDays;
+        this.username = username;
+        this.phone = phone;
+        this.type = type;
+        this.doctorImage = doctorImage;
+        this.password = password;
+        this.experience = experience;
+        this.endtime = endtime;
+    }
+
+    public String getDoctorDocId() {
+        return doctorDocId;
+    }
+
+    public void setDoctorDocId(String doctorDocId) {
+        this.doctorDocId = doctorDocId;
+    }
 
     public String getUserId() {
         return userId;
@@ -121,24 +148,6 @@ public class DoctorListModel {
     }
 
     public void setEndtime(String endtime) {
-        this.endtime = endtime;
-    }
-
-    public DoctorListModel(String userId, String name, String departmentName, String specializedStream, String dob, String age, String consultingTime, String availabilityDays, String username, String phone, String type, String doctorImage, String password, String experience, String endtime) {
-        this.userId = userId;
-        this.name = name;
-        this.departmentName = departmentName;
-        this.specializedStream = specializedStream;
-        this.dob = dob;
-        this.age = age;
-        this.consultingTime = consultingTime;
-        this.availabilityDays = availabilityDays;
-        this.username = username;
-        this.phone = phone;
-        this.type = type;
-        this.doctorImage = doctorImage;
-        this.password = password;
-        this.experience = experience;
         this.endtime = endtime;
     }
 }

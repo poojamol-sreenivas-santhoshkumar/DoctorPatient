@@ -44,9 +44,10 @@ import uk.ac.tees.W9581934.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
-
+    String userType="";
     SharedPreferences sp;
     SharedPreferences.Editor editor;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -54,20 +55,25 @@ public class LoginFragment extends Fragment {
         binding = FragmentLoginBinding.inflate(getLayoutInflater(), container, false);
         return binding.getRoot();
     }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requireActivity().getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
             @Override
             public void handleOnBackPressed() {
-               requireActivity().finish();
+                Navigation.findNavController(getView()).navigateUp();
+
             }
         });
     }
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         requestPermission();
+
+         userType = getArguments().getString("loginType");
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,17 +83,12 @@ public class LoginFragment extends Fragment {
                 if (binding.etEmail.getText().toString().isEmpty())
                     binding.etEmail.setError("please enter your username");
                 else if (binding.etPassword.getText().toString().isEmpty())
-                    binding.etPassword.setError("plaese enter your password");
+                    binding.etPassword.setError("please enter your password");
                 else {
-                    final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
-                    progressDoalog.setMessage("Checking....");
-                    progressDoalog.setTitle("Please wait");
-                    progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                    progressDoalog.show();
                     String username = binding.etEmail.getText().toString();
                     String password = binding.etPassword.getText().toString();
                     FirebaseFirestore db;
-                    db=FirebaseFirestore.getInstance();
+                    db = FirebaseFirestore.getInstance();
 
                     if (username.equals("admin") && password.equals("admin")) {
                         sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
@@ -97,60 +98,115 @@ public class LoginFragment extends Fragment {
                         binding.etEmail.setText("");
                         binding.etPassword.setText("");
                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_adminHomeFragment);
-                        progressDoalog.dismiss();
+
                     } else {
+                        final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
+                        progressDoalog.setMessage("Checking....");
+                        progressDoalog.setTitle("Please wait");
+                        progressDoalog.setCancelable(false);
+                        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                        progressDoalog.show();
 
                         try {
-                            db.collection("User").whereEqualTo("username", username).whereEqualTo("password", password)
-                                    .get()
-                                    .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
-                                        @Override
-                                        public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
-                                            try {
+                            if (userType=="User") {
+                                db.collection("User").whereEqualTo("username", username).whereEqualTo("password", password)
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                try {
 
-                                                if (queryDocumentSnapshots.getDocuments().isEmpty()) {
+                                                    if (queryDocumentSnapshots.getDocuments().isEmpty()) {
+                                                        progressDoalog.dismiss();
+                                                        Toast.makeText(requireContext(), "invalid  credentials", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
+                                                        editor = sp.edit();
 
-                                                    Toast.makeText(requireContext(), "invalid  credentials", Toast.LENGTH_SHORT).show();
-                                                } else {
-                                                    sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-                                                    editor = sp.edit();
-
-                                                    Log.d("##", queryDocumentSnapshots.getDocuments().get(0).getString("userId") + "");
+                                                        Log.d("##", queryDocumentSnapshots.getDocuments().get(0).getString("userId") + "");
                                                         editor.putString("userType", queryDocumentSnapshots.getDocuments().get(0).getString("type"));
                                                         editor.putString("name", queryDocumentSnapshots.getDocuments().get(0).getString("name"));
                                                         editor.putString("mobile", queryDocumentSnapshots.getDocuments().get(0).getString("phone"));
                                                         editor.putString("userId", queryDocumentSnapshots.getDocuments().get(0).getString("userId"));
-                                                    editor.commit();
+                                                        editor.putString("userDocID", queryDocumentSnapshots.getDocuments().get(0).getId());
+                                                        editor.commit();
 
-                                                    if (queryDocumentSnapshots.getDocuments().get(0).getString("type").equals("patient")) {
+                                                        if (queryDocumentSnapshots.getDocuments().get(0).getString("type").equals("patient")) {
 
-                                                        Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_patientHome);
+                                                            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_patientHome);
+                                                            progressDoalog.dismiss();
+                                                        }
+                                                        else{
+                                                            Toast.makeText(requireContext(), "Please Choose Doctor Login", Toast.LENGTH_SHORT).show();
+                                                        }
                                                         progressDoalog.dismiss();
-                                                    } else if (queryDocumentSnapshots.getDocuments().get(0).getString("type").equals("doctor")) {
-
-                                                         Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_doctorDashboard);
-                                                        progressDoalog.dismiss();
+                                                        binding.etEmail.setText("");
+                                                        binding.etPassword.setText("");
                                                     }
 
-                                                    binding.etEmail.setText("");
-                                                    binding.etPassword.setText("");
+                                                } catch (Exception e) {
+                                                    //progressDoalog.dismiss();
+                                                    Log.d("exception: ", e.toString());
                                                 }
-                                                progressDoalog.dismiss();
-                                            } catch (Exception e) {
-                                                progressDoalog.dismiss();
-                                                Log.d("exception: ", e.toString());
                                             }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                progressDoalog.dismiss();
+                                                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
+                            else
+                            {
+                                db.collection("Doctors").whereEqualTo("username", username).whereEqualTo("password", password)
+                                        .get()
+                                        .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+                                            @Override
+                                            public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
+                                                try {
 
+                                                    if (queryDocumentSnapshots.getDocuments().isEmpty()) {
+                                                        progressDoalog.dismiss();
+                                                        Toast.makeText(requireContext(), "invalid  credentials", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
+                                                        editor = sp.edit();
 
-                                        }
-                                    }).addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            progressDoalog.dismiss();
+                                                        Log.d("##", queryDocumentSnapshots.getDocuments().get(0).getString("userId") + "");
+                                                        editor.putString("userType", queryDocumentSnapshots.getDocuments().get(0).getString("type"));
+                                                        editor.putString("name", queryDocumentSnapshots.getDocuments().get(0).getString("name"));
+                                                        editor.putString("mobile", queryDocumentSnapshots.getDocuments().get(0).getString("phone"));
+                                                        editor.putString("userId", queryDocumentSnapshots.getDocuments().get(0).getString("userId"));
+                                                        editor.putString("userDocID", queryDocumentSnapshots.getDocuments().get(0).getId());
+                                                        editor.commit();
 
-                                            Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
-                                        }
-                                    });
+                                                       if (queryDocumentSnapshots.getDocuments().get(0).getString("type").equals("doctor")) {
+
+                                                            Navigation.findNavController(view).navigate(R.id.action_loginFragment_to_doctorDashboard);
+                                                            progressDoalog.dismiss();
+                                                        }
+                                                       else{
+                                                           Toast.makeText(requireContext(), "Please Choose Patient Login", Toast.LENGTH_SHORT).show();
+                                                       }
+                                                        progressDoalog.dismiss();
+                                                        binding.etEmail.setText("");
+                                                        binding.etPassword.setText("");
+                                                    }
+
+                                                } catch (Exception e) {
+                                                    //progressDoalog.dismiss();
+                                                    Log.d("exception: ", e.toString());
+                                                }
+                                            }
+                                        }).addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                progressDoalog.dismiss();
+                                                Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                            }
                         } catch (Exception e) {
                             Log.d("exception: ", e.toString());
                         }
@@ -165,6 +221,7 @@ public class LoginFragment extends Fragment {
             }
         });
     }
+
     public void requestPermission() {
 
         //Multiple permission request
@@ -195,7 +252,6 @@ public class LoginFragment extends Fragment {
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
                         token.continuePermissionRequest();
                     }
-
 
 
                 }).

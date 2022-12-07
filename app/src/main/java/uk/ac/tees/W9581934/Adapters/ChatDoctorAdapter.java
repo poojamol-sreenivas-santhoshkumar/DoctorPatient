@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,12 +56,7 @@ public class ChatDoctorAdapter extends RecyclerView.Adapter<ChatDoctorAdapter.My
     @Override
     public void onBindViewHolder(@NonNull ChatDoctorAdapter.MyviewHolder holder, int position) {
 
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Toast.makeText(view.getRootView().getContext(),"Add chat fragment",Toast.LENGTH_SHORT).show();
-                }
-            });
+
             //holder.btncancel.setVisibility(View.GONE);
 
 
@@ -73,7 +69,16 @@ public class ChatDoctorAdapter extends RecyclerView.Adapter<ChatDoctorAdapter.My
         holder.tvbookingDpt.setText("[" + dm.getDept_name() + "]");
         holder.token.setText(dm.getTokenNo());
 
-
+        binding.getRoot().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle b=new Bundle();
+                b.putString("dataid",dm.getDoc_id());
+                b.putString("dataname",dm.getDoc_name());
+                Navigation.findNavController(view).navigate(R.id.action_chatWithdoctor_to_chatFragment,b);
+                Toast.makeText(view.getRootView().getContext(),"Add chat fragment",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

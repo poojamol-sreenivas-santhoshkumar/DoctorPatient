@@ -80,6 +80,7 @@ public class MyBookingsFragment extends Fragment {
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progressDoalog.setCancelable(false);
         progressDoalog.show();
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("Bookings").whereEqualTo("patient_name",name)
@@ -105,10 +106,20 @@ public class MyBookingsFragment extends Fragment {
 
                             ));
                         }
+                        if (bookingList.isEmpty()){
+                            binding.rcMyBooking.setVisibility(View.GONE);
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.rcMyBooking.setVisibility(View.VISIBLE);
+                            binding.labelNoData.setVisibility(View.INVISIBLE);
+                        }
                         progressDoalog.dismiss();
                         adapter.bookingList=bookingList;
                         binding.rcMyBooking.setAdapter(adapter);
                         adapter.notifyDataSetChanged();
+
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override

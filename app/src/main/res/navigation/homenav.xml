@@ -29,7 +29,12 @@
         android:id="@+id/chatWithdoctor"
         android:name="uk.ac.tees.W9581934.Patient.ChatWithdoctor"
         android:label="fragment_chat_withdoctor"
-        tools:layout="@layout/fragment_chat_withdoctor" />
+        tools:layout="@layout/fragment_chat_withdoctor" >
+
+        <action
+            android:id="@+id/action_chatWithdoctor_to_chatFragment"
+            app:destination="@id/chatFragment" />
+    </fragment>
     <fragment
         android:id="@+id/bookDoctor"
         android:name="uk.ac.tees.W9581934.Patient.BookDoctor"
@@ -47,5 +52,33 @@
         <action
             android:id="@+id/action_bookingPageFragment2_to_myBookingsFragment"
             app:destination="@id/myBookingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="uk.ac.tees.W9581934.Patient.ChatFragment"
+        android:label="ChatFragment" >
+        <argument
+            android:name="dataid"
+            app:argType="string"
+            app:nullable="true"/>
+        <argument
+            android:name="dataname"
+            app:argType="string"
+            app:nullable="true"
+            />
+        <action
+            android:id="@+id/action_chatFragment_to_imageDisplay"
+            app:destination="@id/imageDisplay" />
+    </fragment>
+    <fragment
+        android:id="@+id/imageDisplay"
+        android:name="uk.ac.tees.W9581934.ImageDisplay"
+        android:label="fragment_image_display"
+        tools:layout="@layout/fragment_image_display" >
+    <argument
+        android:name="image"
+        app:argType="string"
+        app:nullable="true"
+        />
     </fragment>
 </navigation>

@@ -75,9 +75,8 @@ public class RegisterFragment extends Fragment {
                     binding.etName.setError("Enter your name");
                 else if (binding.etAge.getText().toString().isEmpty()|| binding.etAge.getText().toString().length()>2)
                     binding.etAge.setError("Enter your Age");
-                else if (binding.etPhone.getText().toString().isEmpty() || binding.etPhone.getText().toString().length()>10
-                || binding.etPhone.getText().toString().length()<10)
-                    binding.etPhone.setError("Enter your valid 10 digit phone number");
+                else if (binding.etPhone.getText().toString().isEmpty() || !binding.etPhone.getText().toString().matches(Validation.mobile))
+                    binding.etPhone.setError("Enter your valid 10 digit phone number,{eg: 0/91, starts with only 6-9}");
                 else if (binding.etAddress.getText().toString().isEmpty())
                     binding.etAddress.setError("Enter your address");
                 else if (binding.etUsername.getText().toString().isEmpty())
@@ -88,8 +87,9 @@ public class RegisterFragment extends Fragment {
                     db = FirebaseFirestore.getInstance();
                     try {
                         progressDoalog = new ProgressDialog(requireContext());
-                        progressDoalog.setMessage("Checking....");
+                        progressDoalog.setMessage("Validating....");
                         progressDoalog.setTitle("Please wait");
+                        progressDoalog.setCancelable(false);
                         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                         progressDoalog.show();
                         db.collection("User").whereEqualTo("username", binding.etUsername.getText().toString()).get().
@@ -99,6 +99,7 @@ public class RegisterFragment extends Fragment {
                                         if (queryDocumentSnapshots.getDocuments().isEmpty()) {
                                             userRegistration(number);
                                         } else {
+                                            progressDoalog.dismiss();
                                             Toast.makeText(requireContext(), "Please Take Another Username", Toast.LENGTH_SHORT).show();
                                         }
                                     }
@@ -110,7 +111,6 @@ public class RegisterFragment extends Fragment {
                                         Toast.makeText(requireContext(), "Creation failed", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                        progressDoalog.dismiss();
                     } catch (Exception e) {
                         progressDoalog.dismiss();
                         Log.d("exception", "Exception" + e.toString());
@@ -122,11 +122,7 @@ public class RegisterFragment extends Fragment {
     }
 
     private void userRegistration(int number) {
-        progressDoalog = new ProgressDialog(requireContext());
-        progressDoalog.setMessage("Checking....");
-        progressDoalog.setTitle("Please wait");
-        progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-        progressDoalog.show();
+
         String username, name, mobile, password,age,address;
         username = binding.etUsername.getText().toString();
         password = binding.etPassword.getText().toString();
@@ -163,6 +159,7 @@ public class RegisterFragment extends Fragment {
                     public void onSuccess(DocumentReference documentReference) {
                         Log.d("TAG", "onSuccess: Success");
                         //Navigation.findNavController(getView()).navigateUp();
+                        progressDoalog.dismiss();
                         Navigation.findNavController(getView()).navigate(R.id.action_registerFragment_to_loginFragment);
                     }
                 }).

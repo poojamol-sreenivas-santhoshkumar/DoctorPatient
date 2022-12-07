@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -65,7 +66,7 @@ public class DoctorDashboard extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
-                        Navigation.findNavController(getView()).navigate(R.id.action_doctorDashboard_to_loginFragment);
+                        Navigation.findNavController(getView()).navigate(R.id.action_doctorDashboard_to_chooseFragment);
 
                     }
                 });
@@ -128,8 +129,9 @@ public class DoctorDashboard extends Fragment {
 
     private void getFilterBookingByDate() {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
-        progressDoalog.setMessage("Loading....");
+        progressDoalog.setMessage("Checking progress....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -137,6 +139,8 @@ public class DoctorDashboard extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("Bookings").whereEqualTo("bookingDate", binding.etDate.getText().toString().trim())
+                .whereEqualTo("doc_id",dic_id)
+                .whereEqualTo("bookingType","Offline")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -157,6 +161,13 @@ public class DoctorDashboard extends Fragment {
                                     , queryDocumentSnapshots.getDocuments().get(i).getString("dept_name"),""
 
                             ));
+                        }
+                        if (bookingList.isEmpty()){
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.labelNoData.setVisibility(View.GONE);
                         }
                         progressDoalog.dismiss();
                         adapter.bookingList = bookingList;
@@ -176,6 +187,7 @@ public class DoctorDashboard extends Fragment {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -183,6 +195,7 @@ public class DoctorDashboard extends Fragment {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("Bookings").whereEqualTo("doc_id", dic_id)
+                .whereEqualTo("bookingType","Offline")
                 .get()
                 .addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                     @Override
@@ -204,6 +217,13 @@ public class DoctorDashboard extends Fragment {
 
                             ));
                         }
+                        if (bookingList.isEmpty()){
+                            binding.labelNoData.setVisibility(View.VISIBLE);
+                        }
+                        else
+                        {
+                            binding.labelNoData.setVisibility(View.GONE);
+                        }
                         progressDoalog.dismiss();
                         adapter.bookingList = bookingList;
                         binding.rvBookings.setAdapter(adapter);
@@ -222,6 +242,7 @@ public class DoctorDashboard extends Fragment {
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -236,11 +257,17 @@ public class DoctorDashboard extends Fragment {
                         Log.d("@", queryDocumentSnapshots + "");
                         binding.tvDocName.setText(queryDocumentSnapshots.getDocuments().get(0).getString("name"));
                         binding.tvDocDepartment.setText(queryDocumentSnapshots.getDocuments().get(0).getString("departmentName"));
-                        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                        byte[] imageBytes = baos.toByteArray();
-                        imageBytes = Base64.decode(queryDocumentSnapshots.getDocuments().get(0).getString("doctorImage"), Base64.DEFAULT);
-                        Bitmap decodedImage = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-                        binding.image.setImageBitmap(decodedImage);
+
+                        try {
+
+                            Glide.with(getContext())
+                                    .load(queryDocumentSnapshots.getDocuments().get(0).getString("doctorImage"))
+                                    .into(binding.image);
+                        }
+                        catch (Exception e){
+
+                        }
+                       
                         progressDoalog.dismiss();
 
                     }

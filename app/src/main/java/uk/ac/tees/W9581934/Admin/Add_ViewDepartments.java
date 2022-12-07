@@ -83,8 +83,9 @@ public class Add_ViewDepartments extends Fragment {
 
     private void AddDepartment() {
         progressDoalog = new ProgressDialog(requireContext());
-        progressDoalog.setMessage("Checking....");
+        progressDoalog.setMessage("Adding Data....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         String deptname;
@@ -117,6 +118,7 @@ public class Add_ViewDepartments extends Fragment {
         progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Checking....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -139,6 +141,7 @@ public class Add_ViewDepartments extends Fragment {
                                         queryDocumentSnapshots.getDocuments().get(i).getId()
                                 ));
                             }
+                            progressDoalog.dismiss();
                             adapter.deptlist = deptlist;
                             binding.rvDepartments.setAdapter(adapter);
                             adapter.notifyDataSetChanged();
@@ -149,7 +152,7 @@ public class Add_ViewDepartments extends Fragment {
                             Toast.makeText(getContext(), "error", Toast.LENGTH_SHORT).show();
                         }
                     });
-            progressDoalog.dismiss();
+
         } catch (Exception e) {
 
         }

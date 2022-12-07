@@ -64,7 +64,7 @@ FragmentChatWithdoctorBinding binding;
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         SharedPreferences sp = getContext().getSharedPreferences("logDetails", Context.MODE_PRIVATE);
-        userId = sp.getString("userId", "error");
+        userId = sp.getString("userDocID", "error");
         adapter = new ChatDoctorAdapter(sp.getString("userType", "error"), getContext());
         binding.rvBookings.setLayoutManager(new LinearLayoutManager(requireContext()));
 //        cdate=getArguments().getString("cdate");
@@ -74,6 +74,7 @@ FragmentChatWithdoctorBinding binding;
         final ProgressDialog progressDoalog = new ProgressDialog(requireContext());
         progressDoalog.setMessage("Loading....");
         progressDoalog.setTitle("Please wait");
+        progressDoalog.setCancelable(false);
         progressDoalog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         progressDoalog.show();
         //Log.d("@", "showData: Called")
@@ -90,7 +91,7 @@ FragmentChatWithdoctorBinding binding;
 
                         int i;
                         for (i = 0; i < queryDocumentSnapshots.getDocuments().size(); i++) {
-                            bookingList.add(new BookingModel(queryDocumentSnapshots.getDocuments().get(i).getId(),
+                            bookingList.add(new BookingModel(queryDocumentSnapshots.getDocuments().get(i).getString("doc_id"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("doc_name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("patient_name"),
                                     queryDocumentSnapshots.getDocuments().get(i).getString("tokenNo")
