@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fe7443ff-bca9-4178-89aa-3f2522a0f76d" name="Changes" comment="Delete doctor,bookings,departments etc-done">
+    <list default="true" id="fe7443ff-bca9-4178-89aa-3f2522a0f76d" name="Changes" comment="Validations Done">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_24_11_22,_10_15_PM_[Changes]/shelved.patch" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +150,14 @@
       <option name="project" value="LOCAL" />
       <updated>1669456547898</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Validations Done">
+      <created>1669546545153</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1669546545153</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -166,6 +175,7 @@
     <MESSAGE value="Second Commit :Firebase Addes" />
     <MESSAGE value="Second Commit : DB integrated" />
     <MESSAGE value="Delete doctor,bookings,departments etc-done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Delete doctor,bookings,departments etc-done" />
+    <MESSAGE value="Validations Done" />
+    <option name="LAST_COMMIT_MESSAGE" value="Validations Done" />
   </component>
 </project>
